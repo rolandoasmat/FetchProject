@@ -5,24 +5,27 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import com.example.fetchproject.ui.viewstate.ItemsListScreenViewState
 
 @Composable
 fun ItemsListScreen(
-    viewModel: ItemsListScreenViewModel
+    viewModel: ItemsListScreenViewModel,
+    modifier: Modifier = Modifier,
 ) {
     val viewState by viewModel.viewState.collectAsState()
-    ItemsListScreen(viewState = viewState)
+    ItemsListScreen(viewState = viewState, modifier = modifier)
 }
 
 @Composable
 private fun ItemsListScreen(
-    viewState: ItemsListScreenViewState
+    viewState: ItemsListScreenViewState,
+    modifier: Modifier = Modifier,
 ) {
     when (viewState) {
 
         is ItemsListScreenViewState.Ready -> {
-            ItemsListScreenReady(viewState = viewState)
+            ItemsListScreenReady(viewState = viewState, modifier = modifier)
         }
         ItemsListScreenViewState.Loading -> {
             // TODO loading state
@@ -35,9 +38,10 @@ private fun ItemsListScreen(
 
 @Composable
 private fun ItemsListScreenReady(
-    viewState: ItemsListScreenViewState.Ready
+    viewState: ItemsListScreenViewState.Ready,
+    modifier: Modifier = Modifier,
 ) {
-    LazyColumn {
+    LazyColumn(modifier = modifier) {
         items(viewState.items) { itemViewState ->
             ListItemCell(itemViewState)
         }

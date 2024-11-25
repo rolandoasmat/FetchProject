@@ -5,11 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.fetchproject.domain.ItemsRepository
 import com.example.fetchproject.ui.transformer.ItemViewStateTransformer
 import com.example.fetchproject.ui.viewstate.ItemsListScreenViewState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ItemsListScreenViewModel(
+@HiltViewModel
+class ItemsListScreenViewModel @Inject constructor(
     private val repository: ItemsRepository,
     private val itemViewStateTransformer: ItemViewStateTransformer,
 ): ViewModel() {
@@ -23,5 +26,4 @@ class ItemsListScreenViewModel(
             _viewState.emit(viewState)
         }
     }
-
 }
