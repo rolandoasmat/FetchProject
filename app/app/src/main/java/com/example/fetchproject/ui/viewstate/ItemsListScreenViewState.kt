@@ -8,7 +8,7 @@ sealed interface ItemsListScreenViewState {
 
     @Immutable
     class Ready(
-        val items: List<ItemViewState>
+        val groups: List<ItemsGroupViewState>,
     ): ItemsListScreenViewState
 
     @Immutable

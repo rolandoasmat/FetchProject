@@ -1,5 +1,6 @@
 package com.example.fetchproject.ui.screen
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -36,14 +37,20 @@ private fun ItemsListScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ItemsListScreenReady(
     viewState: ItemsListScreenViewState.Ready,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(modifier = modifier) {
-        items(viewState.items) { itemViewState ->
-            ListItemCell(itemViewState)
+        viewState.groups.forEach { group ->
+            stickyHeader(key = group.header.title) {
+                GroupHeader(viewState = group.header)
+            }
+            items(group.items, key = { it.id }) { itemViewState ->
+                ListItemCell(itemViewState)
+            }
         }
     }
 }
