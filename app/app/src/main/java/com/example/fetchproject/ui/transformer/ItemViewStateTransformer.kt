@@ -11,14 +11,16 @@ class ItemViewStateTransformer @Inject constructor() {
     fun transform(
         data: List<ItemData>
     ): ItemsListScreenViewState {
-        val groups = data.groupBy { it.listId }.map { group ->
+        val groups = data.groupBy { it.listId }
+            .toSortedMap()
+            .map { group ->
             val header = HeaderViewState(title = "List id: ${group.key}")
             val items = group.value
                 .sortedBy { it.name }
                 .map { item ->
                 ItemViewState(
                     id = item.id,
-                    name = item.name,
+                    nameLabel = item.name,
                 )
             }
             ItemsGroupViewState(header = header, items = items)

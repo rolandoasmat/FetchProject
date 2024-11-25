@@ -5,5 +5,5 @@ import androidx.compose.runtime.Immutable
 @Immutable
 data class ItemViewState(
     val id: Int,
-    val name: String
+    val nameLabel: String
 )
