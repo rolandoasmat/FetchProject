@@ -10,21 +10,23 @@ import javax.inject.Inject
 class ItemViewStateTransformer @Inject constructor() {
     fun transform(
         data: List<ItemData>
-    ): ItemsListScreenViewState {
+    ): ItemsListScreenViewState = if (data.isEmpty()) {
+        ItemsListScreenViewState.Empty
+    } else {
         val groups = data.groupBy { it.listId }
             .toSortedMap()
             .map { group ->
-            val header = HeaderViewState(title = "List id: ${group.key}")
-            val items = group.value
-                .sortedBy { it.name }
-                .map { item ->
-                ItemViewState(
-                    id = item.id,
-                    nameLabel = item.name,
-                )
+                val header = HeaderViewState(title = group.key.toString())
+                val items = group.value
+                    .sortedBy { it.name }
+                    .map { item ->
+                        ItemViewState(
+                            id = item.id,
+                            nameLabel = item.name,
+                        )
+                    }
+                ItemsGroupViewState(header = header, items = items)
             }
-            ItemsGroupViewState(header = header, items = items)
-        }
-        return ItemsListScreenViewState.Ready(groups = groups)
+        ItemsListScreenViewState.Ready(groups)
     }
 }

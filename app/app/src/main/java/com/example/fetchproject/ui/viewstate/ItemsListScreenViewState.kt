@@ -16,4 +16,7 @@ sealed interface ItemsListScreenViewState {
 
     @Immutable
     data object Error: ItemsListScreenViewState
+
+    @Immutable
+    data object Empty: ItemsListScreenViewState
 }

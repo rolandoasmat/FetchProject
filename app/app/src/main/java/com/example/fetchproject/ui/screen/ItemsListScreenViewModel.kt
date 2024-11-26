@@ -21,9 +21,24 @@ class ItemsListScreenViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            fetchData()
+        }
+    }
+
+    fun retry() {
+        viewModelScope.launch {
+            fetchData()
+        }
+    }
+
+    private suspend fun fetchData() {
+        _viewState.emit(ItemsListScreenViewState.Loading)
+        try {
             val items = repository.getItems()
             val viewState = itemViewStateTransformer.transform(data = items)
             _viewState.emit(viewState)
+        } catch (e: Exception) {
+            _viewState.emit(ItemsListScreenViewState.Error)
         }
     }
 }

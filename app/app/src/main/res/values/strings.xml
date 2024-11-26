@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FetchProject</string>
+    <string name="loading_label">Loading…</string>
+    <string name="error_label">Something went wrong! Please try again later.</string>
+    <string name="retry_label">Retry</string>
+    <string name="empty_state_label">No items to display.</string>
+    <string name="list_id_header">List id: %1$s</string>
 </resources>
