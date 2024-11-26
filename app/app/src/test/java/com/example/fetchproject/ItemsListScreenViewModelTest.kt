@@ -35,6 +35,7 @@ class ItemsListScreenViewModelTest {
         viewModel = ItemsListScreenViewModel(
             repository = repository,
             itemViewStateTransformer = itemViewStateTransformer,
+            ioDispatcher = Dispatchers.Unconfined,
         )
 
         // Assert
@@ -54,6 +55,7 @@ class ItemsListScreenViewModelTest {
         viewModel = ItemsListScreenViewModel(
             repository = repository,
             itemViewStateTransformer = itemViewStateTransformer,
+            ioDispatcher = Dispatchers.Unconfined,
         )
 
         // Assert

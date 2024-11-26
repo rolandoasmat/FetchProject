@@ -64,6 +64,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     testImplementation("io.mockk:mockk:1.13.13")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+    implementation("androidx.lifecycle:lifecycle-process:2.8.7")
 }
 
 // Allow references to generated code
